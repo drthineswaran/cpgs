@@ -144,13 +144,13 @@
       animation: slideUp 0.4s forwards;
     }
 
-    .overlay-menu a:nth-child(n+2) { animation-delay: 0.1s; }
-    .overlay-menu a:nth-child(n+3) { animation-delay: 0.2s; }
-    .overlay-menu a:nth-child(n+4) { animation-delay: 0.3s; }
-    .overlay-menu a:nth-child(n+5) { animation-delay: 0.4s; }
-    .overlay-menu a:nth-child(n+6) { animation-delay: 0.5s; }
-    .overlay-menu a:nth-child(n+7) { animation-delay: 0.6s; }
-    .overlay-menu a:nth-child(n+8) { animation-delay: 0.7s; }
+    .overlay-menu a:nth-child(n+1) { animation-delay: 0.1s; }
+    .overlay-menu a:nth-child(n+2) { animation-delay: 0.2s; }
+    .overlay-menu a:nth-child(n+3) { animation-delay: 0.3s; }
+    .overlay-menu a:nth-child(n+4) { animation-delay: 0.4s; }
+    .overlay-menu a:nth-child(n+5) { animation-delay: 0.5s; }
+    .overlay-menu a:nth-child(n+6) { animation-delay: 0.6s; }
+    .overlay-menu a:nth-child(n+7) { animation-delay: 0.7s; }
 
     @keyframes slideUp {
       to {
@@ -208,6 +208,54 @@
       text-align: center;
       padding: 15px;
     }
+
+    /* Mobile Enhancements */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 16px;
+        text-align: right;
+      }
+
+      .header-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .left-group {
+        gap: 6px;
+      }
+
+      .breadcrumb {
+        font-size: 13px;
+        margin-top: 70px;
+        padding: 8px 12px;
+      }
+
+      section {
+        padding: 20px 15px;
+        font-size: 15px;
+      }
+
+      .overlay-menu a {
+        font-size: 20px;
+        margin: 12px 0;
+      }
+
+      .content-wrapper {
+        padding: 10px;
+      }
+
+      .theme-toggle {
+        font-size: 10px;
+        padding: 2px 8px;
+      }
+
+      footer {
+        font-size: 13px;
+        padding: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -223,7 +271,6 @@
       <img src="logo.png" alt="QIU Logo">
     </div>
     <h1>Centre for Postgraduate Studies</h1>
-    <!--<button class="theme-toggle" onclick="toggleTheme()">🌓</button>-->
   </div>
 </header>
 
@@ -245,22 +292,37 @@
 <div class="content-wrapper">
   <section id="home" class="active">
     <h2>Welcome to the Centre</h2>
-  
     <p>Explore our advanced programmes designed to cultivate leaders and researchers in various disciplines at QIU.</p>
-
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  
   </section>
 
-
-  <section id="masters"><h2>Master's Programmes</h2><ul><li>MBA</li><li>M.Ed</li><li>M.Sc Biotech</li></ul></section>
-  <section id="phd"><h2>PhD Programmes</h2><ul><li>PhD in Business</li><li>PhD in Education</li><li>PhD in Science</li></ul></section>
-  <section id="requirements"><h2>Entry Requirements</h2><p>Recognized degree, IELTS 6.0, relevant background.</p></section>
-  <section id="apply"><h2>How to Apply</h2><p>Via portal with documents and research proposal.</p></section>
-  <section id="focus"><h2>Research Focus</h2><ul><li>Biotechnology</li><li>Education</li><li>Healthcare</li><li>Digital Business</li></ul></section>
-  <section id="publications"><h2>Publications</h2><p>Access our research repository.</p></section>
-  <section id="contact"><h2>Contact Us</h2><p>Email: <a href="mailto:cpgs@qiu.edu.my">cpgs@qiu.edu.my</a><br>Tel: +605-249 0500<br>QIU, Ipoh</p></section>
+  <section id="masters">
+    <h2>Master's Programmes</h2>
+    <ul><li>MBA</li><li>M.Ed</li><li>M.Sc Biotech</li></ul>
+  </section>
+  <section id="phd">
+    <h2>PhD Programmes</h2>
+    <ul><li>PhD in Business</li><li>PhD in Education</li><li>PhD in Science</li></ul>
+  </section>
+  <section id="requirements">
+    <h2>Entry Requirements</h2>
+    <p>Recognized degree, IELTS 6.0, relevant background.</p>
+  </section>
+  <section id="apply">
+    <h2>How to Apply</h2>
+    <p>Via portal with documents and research proposal.</p>
+  </section>
+  <section id="focus">
+    <h2>Research Focus</h2>
+    <ul><li>Biotechnology</li><li>Education</li><li>Healthcare</li><li>Digital Business</li></ul>
+  </section>
+  <section id="publications">
+    <h2>Publications</h2>
+    <p>Access our research repository.</p>
+  </section>
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:cpgs@qiu.edu.my">cpgs@qiu.edu.my</a><br>Tel: +605-249 0500<br>QIU, Ipoh</p>
+  </section>
 </div>
 
 <footer>
@@ -303,10 +365,6 @@
         setActiveSection(target);
       });
     });
-  }
-
-  function toggleTheme() {
-    document.documentElement.toggleAttribute('data-theme', 'dark');
   }
 
   updateBreadcrumb("home");
