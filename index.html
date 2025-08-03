@@ -20,13 +20,30 @@
       padding: 0;
     }
 
+
+
     html, body {
       height: 100%;
+        margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+        display: flex;
       font-family: Arial, sans-serif;
       scroll-behavior: smooth;
       background-color: var(--bg-color);
       color: var(--text-color);
     }
+
+
+main {
+  flex: 1;
+  margin-top: 70px;
+}
+
+body {
+  overflow: hidden;
+}
 
     header {
       background: var(--header-bg);
@@ -93,20 +110,22 @@
 
     .overlay-menu {
       position: fixed;
-      top: 0;
+        top: 70px; /* leave space for header */
+
       left: 0;
       width: 100%;
-      height: 100vh;
+        height: calc(100vh - 70px); /* avoid using margin-top, instead adjust height */
       background-color: var(--menu-bg);
       z-index: 1000;
       display: none;
       flex-direction: column;
       padding: 30px;
       overflow-y: auto;
-      margin-top: 70px;
       margin-bottom: 30px;
 
     }
+
+
 
     .overlay-menu.active {
       display: flex;
@@ -144,11 +163,10 @@
       cursor: pointer;
     }
 
-    main {
-      margin-top: 70px;
-    }
+
 
     .image-slider {
+      display: none; /* default hidden */
       width: 100%;
       height: 100vh;
       overflow: hidden;
@@ -232,7 +250,8 @@
       <div class="hamburger" onclick="toggleMenu(this)">
         <span></span><span></span><span></span>
       </div>
-      <img src="logo.png" alt="QIU Logo">
+      <a href="#" class="logo-link" data-target="home">
+<img src="logo.png" alt="QIU Logo"></a>
     </div>
     <h1>Centre for Postgraduate Studies</h1>
   </div>
@@ -273,6 +292,10 @@
     el.classList.toggle('open');
     const overlay = document.getElementById('overlayMenu');
     overlay?.classList.toggle('active');
+
+      // Prevent background scroll when overlay is open
+  document.body.style.overflow = overlay?.classList.contains('active') ? 'hidden' : 'auto';
+
   }
 
   const slides = document.getElementById('slides');
@@ -310,6 +333,19 @@
 
       // Attach click listeners after menu loads
       document.querySelectorAll('.menu-link').forEach(link => {
+
+        // Logo click navigates to home
+document.querySelector('.logo-link')?.addEventListener('click', e => {
+  e.preventDefault();
+  loadPageContent('home');
+  document.getElementById('imageSlider').style.display = 'block';
+  if (document.querySelector('.hamburger')?.classList.contains('open')) {
+    toggleMenu(document.querySelector('.hamburger'));
+  }
+});
+
+
+
         link.addEventListener('click', e => {
           e.preventDefault();
           const page = link.getAttribute('data-target');
@@ -320,22 +356,35 @@
       });
     });
 
-  function loadPageContent(page) {
-    fetch(`sections/${page}.html`)
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('contentContainer').innerHTML = html;
-      })
-      .catch(() => {
-        document.getElementById('contentContainer').innerHTML =
-          `<section><h2>Error</h2><p>Unable to load "${page}".</p></section>`;
-      });
-  }
 
-  // Load default home content on first load
-  window.addEventListener('DOMContentLoaded', () => {
-    loadPageContent('home');
-  });
+  function loadPageContent(page) {
+  fetch(`sections/${page}.html`)
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('contentContainer').innerHTML = html;
+
+      // Show slider only on 'home' page
+      const slider = document.getElementById('imageSlider');
+      if (page === 'home') {
+        slider.style.display = 'block';
+      } else {
+        slider.style.display = 'none';
+      }
+    })
+    .catch(() => {
+      document.getElementById('contentContainer').innerHTML =
+        `<section><h2>Error</h2><p>Unable to load "${page}".</p></section>`;
+      document.getElementById('imageSlider').style.display = 'none';
+    });
+}
+
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('imageSlider').style.display = 'block'; // for home
+  loadPageContent('home');
+});
+
+
 </script>
 
 </body>
