@@ -325,36 +325,35 @@ body {
 
   showSlide(0);
 
-  // Load overlay menu
-  fetch('overlay-menu.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('overlayMenuContainer').innerHTML = html;
-
-      // Attach click listeners after menu loads
-      document.querySelectorAll('.menu-link').forEach(link => {
-
-        // Logo click navigates to home
-document.querySelector('.logo-link')?.addEventListener('click', e => {
-  e.preventDefault();
-  loadPageContent('home');
-  document.getElementById('imageSlider').style.display = 'block';
-  if (document.querySelector('.hamburger')?.classList.contains('open')) {
-    toggleMenu(document.querySelector('.hamburger'));
-  }
-});
 
 
 
-        link.addEventListener('click', e => {
-          e.preventDefault();
-          const page = link.getAttribute('data-target');
-          loadPageContent(page);
-          //alert(page);
-          toggleMenu(document.querySelector('.hamburger'));
-        });
+// Load overlay menu
+fetch('overlay-menu.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('overlayMenuContainer').innerHTML = html;
+
+    // Logo click navigates to home
+    document.querySelector('.logo-link')?.addEventListener('click', e => {
+      e.preventDefault();
+      loadPageContent('home');
+      document.getElementById('imageSlider').style.display = 'block';
+      if (document.querySelector('.hamburger')?.classList.contains('open')) {
+        toggleMenu(document.querySelector('.hamburger'));
+      }
+    });
+
+    // Attach click listeners to menu and submenu links
+    document.querySelectorAll('.menu-link, .submenu-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const page = link.getAttribute('data-target');
+        loadPageContent(page);
+        toggleMenu(document.querySelector('.hamburger'));
       });
     });
+  });
 
 
   function loadPageContent(page) {
