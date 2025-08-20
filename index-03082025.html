@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Centre for Postgraduate Studies - QIU</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    :root {
+      --bg-color: #f4f4f4;
+      --text-color: #000;
+      --header-bg: linear-gradient(to right, red, black);
+      --menu-bg: rgba(0, 0, 0, 0.95);
+      --section-bg: white;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+
+    html, body {
+      height: 100%;
+        margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+        display: flex;
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+
+main {
+  flex: 1;
+  margin-top: 70px;
+}
+
+    header {
+      background: var(--header-bg);
+      color: white;
+      padding: 10px 20px;
+      border-bottom: 1px solid #b71c1c;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1001;
+      height: 70px;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .left-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header img {
+      height: 45px;
+    }
+
+    header h1 {
+      font-size: 20px;
+      flex: 1;
+      text-align: right;
+    }
+
+    .hamburger {
+      width: 24px;
+      height: 18px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hamburger span {
+      height: 2px;
+      background: white;
+      border-radius: 1px;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .overlay-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--menu-bg);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      padding: 30px;
+      overflow-y: auto;
+      margin-top: 70px;
+      margin-bottom: 30px;
+
+    }
+
+    .overlay-menu.active {
+      display: flex;
+    }
+
+    .overlay-menu-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .overlay-menu-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 30px;
+    }
+
+    .overlay-menu .menu-column {
+      color: white;
+    }
+
+    .overlay-menu .menu-link,
+    .overlay-menu .submenu-link {
+      color: white;
+      text-decoration: none;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .overlay-menu .menu-link:hover,
+    .overlay-menu .submenu-link:hover {
+      color: #00aced;
+      cursor: pointer;
+    }
+
+
+
+    .image-slider {
+      display: none; /* default hidden */
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slides {
+      display: flex;
+      width: 400%;
+      height: 100%;
+      transition: transform 0.8s ease-in-out;
+    }
+
+    .slides img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: fill;
+      flex-shrink: 0;
+    }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .slider-dot {
+      width: 12px;
+      height: 12px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .slider-dot.active {
+      background: #fff;
+    }
+
+    .content-wrapper {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px;
+    }
+
+    section {
+      background: var(--section-bg);
+      padding: 30px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      border-radius: 8px;
+    }
+
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .overlay-menu-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .overlay-menu-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="left-group">
+      <div class="hamburger" onclick="toggleMenu(this)">
+        <span></span><span></span><span></span>
+      </div>
+      <a href="#" class="logo-link" data-target="home">
+<img src="logo.png" alt="QIU Logo"></a>
+    </div>
+    <h1>Centre for Postgraduate Studies</h1>
+  </div>
+</header>
+
+<div id="overlayMenuContainer"></div>
+
+<main>
+  <div class="image-slider" id="imageSlider">
+    <div class="slides" id="slides">
+      <img src="ds1.png" alt="Slide 1">
+      <img src="ds2.png" alt="Slide 2">
+      <img src="ds3.png" alt="Slide 3">
+      <img src="ds4.png" alt="Slide 4">
+    </div>
+    <div class="slider-dots" id="sliderDots">
+      <div class="slider-dot active" data-index="0"></div>
+      <div class="slider-dot" data-index="1"></div>
+      <div class="slider-dot" data-index="2"></div>
+      <div class="slider-dot" data-index="3"></div>
+    </div>
+  </div>
+
+  <div class="content-wrapper" id="contentContainer">
+    <!-- Dynamic content from sections/home.html will load here -->
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 Centre for Postgraduate Studies, QIU
+</footer>
+
+<script>
+
+
+
+  function toggleMenu(el) {
+    el.classList.toggle('open');
+    const overlay = document.getElementById('overlayMenu');
+    overlay?.classList.toggle('active');
+  }
+
+  const slides = document.getElementById('slides');
+  const dots = document.querySelectorAll('.slider-dot');
+  let currentIndex = 0;
+  let sliderInterval;
+
+  function showSlide(index) {
+    currentIndex = index;
+    slides.style.transform = `translateX(-${100 * index}vw)`;
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+  }
+
+  function nextSlide() {
+    showSlide((currentIndex + 1) % dots.length);
+  }
+
+  sliderInterval = setInterval(nextSlide, 5000);
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      clearInterval(sliderInterval);
+      showSlide(index);
+      sliderInterval = setInterval(nextSlide, 5000);
+    });
+  });
+
+  showSlide(0);
+
+  // Load overlay menu
+  fetch('overlay-menu.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('overlayMenuContainer').innerHTML = html;
+
+      // Attach click listeners after menu loads
+      document.querySelectorAll('.menu-link').forEach(link => {
+
+        // Logo click navigates to home
+document.querySelector('.logo-link')?.addEventListener('click', e => {
+  e.preventDefault();
+  loadPageContent('home');
+  document.getElementById('imageSlider').style.display = 'block';
+  if (document.querySelector('.hamburger')?.classList.contains('open')) {
+    toggleMenu(document.querySelector('.hamburger'));
+  }
+});
+
+
+
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const page = link.getAttribute('data-target');
+          loadPageContent(page);
+          //alert(page);
+          toggleMenu(document.querySelector('.hamburger'));
+        });
+      });
+    });
+
+
+  function loadPageContent(page) {
+  fetch(`sections/${page}.html`)
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('contentContainer').innerHTML = html;
+
+      // Show slider only on 'home' page
+      const slider = document.getElementById('imageSlider');
+      if (page === 'home') {
+        slider.style.display = 'block';
+      } else {
+        slider.style.display = 'none';
+      }
+    })
+    .catch(() => {
+      document.getElementById('contentContainer').innerHTML =
+        `<section><h2>Error</h2><p>Unable to load "${page}".</p></section>`;
+      document.getElementById('imageSlider').style.display = 'none';
+    });
+}
+
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('imageSlider').style.display = 'block'; // for home
+  loadPageContent('home');
+});
+
+
+</script>
+
+</body>
+</html>

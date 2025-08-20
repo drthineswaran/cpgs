@@ -1,0 +1,94 @@
+<!-- header.html -->
+<header>
+  <style>
+    header {
+      background: linear-gradient(to right, red, black);
+      color: white;
+      padding: 10px 20px;
+      border-bottom: 1px solid #b71c1c;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1001;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .left-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header img {
+      height: 45px;
+    }
+
+    header h1 {
+      font-size: 20px;
+      flex: 1;
+      text-align: right;
+    }
+
+    .hamburger {
+      width: 24px;
+      height: 18px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .hamburger span {
+      height: 2px;
+      background: white;
+      border-radius: 1px;
+      transition: all 0.3s ease-in-out;
+      transform-origin: center;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 8px 12px;
+      }
+
+      header h1 {
+        font-size: 15px;
+        text-align: right;
+      }
+
+      .left-group {
+        gap: 6px;
+      }
+    }
+  </style>
+  <div class="header-inner">
+    <div class="left-group">
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <img src="logo.png" alt="QIU Logo">
+    </div>
+    <h1>Centre for Postgraduate Studies</h1>
+  </div>
+</header>

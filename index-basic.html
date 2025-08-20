@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Centre for Postgraduate Studies - QIU</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      background-color: #f4f4f4;
+      min-height: 100vh;
+    }
+
+    header {
+      /*background-color: #b71c1c;*/
+      background-color: #ff0000;
+      color: white;
+      text-align: center;
+      padding: 10px 20px;
+      border-bottom: 1px solid #880e0e;
+    }
+
+    header img {
+      height: 30px;
+      margin-bottom: 10px;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1602524208934-46a8c1b6a5b3?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 1px 1px 4px #000;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    nav {
+      background-color: #000;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    nav li {
+      position: relative;
+    }
+
+    nav a {
+      display: block;
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: #333;
+    }
+
+    nav li:hover ul {
+      display: block;
+    }
+
+    nav ul ul {
+      display: none;
+      position: absolute;
+      background-color: #222;
+      min-width: 180px;
+      z-index: 1000;
+    }
+
+    nav ul ul li {
+      border-bottom: 1px solid #444;
+    }
+
+    nav ul ul a {
+      padding: 12px 16px;
+    }
+
+    .breadcrumb {
+      /*background: #fce4ec; */
+      padding: 10px 20px;
+      font-size: 14px;
+      color: #0000ff;
+    }
+
+    .breadcrumb span {
+      margin-right: 5px;
+    }
+
+    .breadcrumb .divider {
+      margin: 0 5px;
+      color: #666;
+    }
+
+    .content-wrapper {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    section {
+      display: none;
+      padding: 30px;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 1000px;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      border-radius: 8px;
+      animation: fadeIn 0.5s ease-in-out;
+      flex-grow: 1;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+      }
+
+      nav ul ul {
+        position: static;
+      }
+
+      .hero {
+        font-size: 20px;
+        height: 180px;
+        padding: 20px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="logo.png" alt="QIU Logo">
+  <h3>Centre for Postgraduate Studies</h3>
+  <!--<p>Quest International University (QIU)</p>-->
+</header>
+
+<!--<div class="hero">
+  Empowering Future Scholars
+</div>-->
+
+<nav>
+  <ul>
+    <li><a href="#" class="menu-link active" data-target="home">Home</a></li>
+    <li><a href="#">Programmes ▾</a>
+      <ul>
+        <li><a href="#" class="menu-link" data-target="masters">Master's</a></li>
+        <li><a href="#" class="menu-link" data-target="phd">PhD</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Admission ▾</a>
+      <ul>
+        <li><a href="#" class="menu-link" data-target="requirements">Requirements</a></li>
+        <li><a href="#" class="menu-link" data-target="apply">Apply</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Research ▾</a>
+      <ul>
+        <li><a href="#" class="menu-link" data-target="focus">Focus</a></li>
+        <li><a href="#" class="menu-link" data-target="publications">Publications</a></li>
+      </ul>
+    </li>
+    <li><a href="#" class="menu-link" data-target="contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb" id="breadcrumb">
+  <span>Home</span>
+</div>
+
+<div class="content-wrapper">
+  <section id="home" class="active">
+    <h2>Welcome to the Centre</h2>
+    <p>Explore our advanced programmes designed to cultivate leaders and researchers in various disciplines at QIU.</p>
+  </section>
+
+  <section id="masters">
+    <h2>Master's Programmes</h2>
+    <ul>
+      <li>Master of Business Administration</li>
+      <li>Master of Education</li>
+      <li>Master of Science (Biotech)</li>
+    </ul>
+  </section>
+
+  <section id="phd">
+    <h2>PhD Programmes</h2>
+    <ul>
+      <li>PhD in Business</li>
+      <li>PhD in Education</li>
+      <li>PhD in Science</li>
+    </ul>
+  </section>
+
+  <section id="requirements">
+    <h2>Entry Requirements</h2>
+    <p>Recognized degree, English proficiency (IELTS 6.0), and relevant background are needed.</p>
+  </section>
+
+  <section id="apply">
+    <h2>How to Apply</h2>
+    <p>Apply via QIU portal with transcripts, proposal (for research), and required documents.</p>
+  </section>
+
+  <section id="focus">
+    <h2>Research Focus</h2>
+    <ul>
+      <li>Biotechnology</li>
+      <li>Education</li>
+      <li>Healthcare</li>
+      <li>Digital Business</li>
+    </ul>
+  </section>
+
+  <section id="publications">
+    <h2>Publications</h2>
+    <p>Access faculty and student publications via our research repository.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:cpgs@qiup.edu.my">cpgs@qiup.edu.my</a><br>
+       Tel: +605-249 0500<br>
+       QIU, Ipoh, Perak, Malaysia</p>
+  </section>
+</div>
+
+<footer>
+  &copy; 2025 Centre for Postgraduate Studies, QIU
+</footer>
+
+<script>
+  const menuLinks = document.querySelectorAll('.menu-link');
+  const sections = document.querySelectorAll('section');
+  const breadcrumb = document.getElementById('breadcrumb');
+
+  function setActiveSection(id) {
+    sections.forEach(s => s.classList.remove('active'));
+    document.querySelector(`#${id}`).classList.add('active');
+    document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
+    document.querySelector(`.menu-link[data-target="${id}"]`)?.classList.add('active');
+    updateBreadcrumb(id);
+  }
+
+  function updateBreadcrumb(id) {
+    const title = document.querySelector(`#${id} h2`)?.textContent || '';
+    breadcrumb.innerHTML = `<span>Home</span><span class="divider">›</span><span>${title}</span>`;
+  }
+
+  menuLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.getAttribute('data-target');
+      setActiveSection(id);
+    });
+  });
+</script>
+
+</body>
+</html>
