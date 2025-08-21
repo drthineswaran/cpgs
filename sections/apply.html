@@ -1,2 +1,178 @@
-<h2>How to Apply</h2>
-<p>Via portal with documents and research proposal.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Postgraduate Application Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: auto;
+      box-shadow: 0px 0px 10px #ccc;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input[type="text"], 
+    input[type="email"],
+    /*input[type="tel"],*/
+    select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    textarea {
+      resize: vertical;
+      height: 100px;
+    }
+    /* Override for phone input so flag dropdown works */
+    .iti {
+      width: 100%;
+    }
+    .iti input {
+      width: 100%;
+      padding-left: 50px; /* space for flag dropdown */
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      background: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #004c99;
+    }
+
+    /* Fix intl-tel-input field */
+.iti {
+  width: 100% !important;
+}
+
+.iti--allow-dropdown input {
+  padding-left: 52px !important; /* leave space for flag */
+  box-sizing: border-box;
+}
+
+.iti__flag-container {
+  padding: 0 6px;
+}
+
+
+  </style>
+
+  <!-- intl-tel-input CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
+</head>
+<body>
+
+  <h2>Get Started <br> Apply for Preliminary Review</h2>
+
+  <form action="../submit_application.php" method="POST" enctype="multipart/form-data">
+    
+    <!-- Personal Information -->
+    <h3>Personal Information</h3>
+    <label>Full Name:</label>
+    <input type="text" name="fullname" required>
+
+    <label>IC/Passport Number:</label>
+    <input type="text" name="id_number" required>
+
+    <label>Email Address:</label>
+    <input type="email" name="email" required>
+
+    <label>Phone Number:</label>
+    <input id="phone" type="tel" name="phone" required>
+    <input type="hidden" name="phone_full" id="phone_full">
+
+    <br><br><br><hr><br>
+
+    <!-- Programme Application -->
+    <h3>Programme Application</h3>
+    <label>Programme of Study:</label>
+    <select name="programme" required>
+      <option value="">-- Select Programme --</option>
+      <option value="msc">Master of Science (MSc)</option>
+      <option value="phd">Doctor of Philosophy (PhD)</option>
+      <option value="mba">Master of Business Administration (MBA)</option>
+    </select>
+
+    <br><br>
+    
+    <!-- Proposal Section -->
+    <h3>Research Proposal</h3>
+    <label>Proposed Research Title:</label>
+    <input type="text" name="proposal_title" required>
+
+    <label>Abstract / Research Summary:</label>
+    <textarea name="abstract" required></textarea>
+
+    <label>Upload Proposal Document (PDF):</label><br>
+    <input type="file" name="proposal_file" accept=".pdf">
+
+    <br><br><hr><br>
+
+<!-- Declaration -->
+<h3 style="text-align: left;">Declaration</h3>
+<br>  <input type="checkbox" name="agreement" required>
+  I hereby declare that all the information provided is true and correct.
+
+<br><br>
+
+<!-- Submit -->
+<button type="submit" style="display: block; text-align: left;">Submit Application</button>
+
+</form>
+
+
+
+  <!-- intl-tel-input JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"></script>
+
+  <script>
+    const phoneInputField = document.querySelector("#phone");
+    const phoneFull = document.querySelector("#phone_full");
+
+    const iti = window.intlTelInput(phoneInputField, {
+      initialCountry: "my",   // Default Malaysia
+      separateDialCode: true, 
+      preferredCountries: ["my", "sg", "us", "gb", "au"],
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+    });
+
+    const form = phoneInputField.closest("form");
+    form.addEventListener("submit", function (e) {
+      if (!iti.isValidNumber()) {
+        e.preventDefault(); // Stop form submission
+        alert("Please enter a valid phone number.");
+        phoneInputField.focus();
+        return false;
+      }
+      // Put full international number into hidden input
+      phoneFull.value = iti.getNumber();
+    });
+  </script>
+
+
+</body>
+</html>
